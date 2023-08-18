@@ -30,6 +30,8 @@ class CriptoWatchCoordinator: Coordinator {
         navigationController.navigationBar.tintColor = .systemBlue
         navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
         
+        // Show Cripto List
+        showCryptoCoinsList()
     }
     
     override func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
@@ -42,5 +44,17 @@ class CriptoWatchCoordinator: Coordinator {
         childCoordinators.forEach { (childCoordinator) in
             childCoordinator.navigationController(navigationController, didShow: viewController, animated: animated)
         }
+    }
+    
+    
+    // MARK: - Private API
+    
+    private func showCryptoCoinsList() {
+        
+        // Initializing Cripto Coins List View Controller
+        let coinsListVC = CriptoCoinsListVC()
+        
+        // Push Coins List View Controller Onto Navigation Stack
+        navigationController.pushViewController(coinsListVC, animated: true)
     }
 }
