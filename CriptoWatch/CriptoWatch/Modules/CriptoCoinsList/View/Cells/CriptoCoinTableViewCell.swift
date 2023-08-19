@@ -58,6 +58,16 @@ final class CryptoCoinTableViewCell: UITableViewCell {
 }
 
 
+// MARK: - Public API
+extension CryptoCoinTableViewCell {
+    func configure(with coin: CriptoCoinRepresentable) {
+        coinImageView.image = UIImage(systemName: "bitcoinign.circle")
+        nameLabel.text = coin.name
+        currentPriceLabel.text = "Current Price: \(coin.currentPrice)"
+        lastUpdatedLabel.text = "Last Updated: \(coin.lastUpdated)"
+        symbolLabel.text = coin.symbol
+    }
+}
 
 
 // MARK: - Private API
