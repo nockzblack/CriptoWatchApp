@@ -65,13 +65,13 @@ final class CryptoCoinTableViewCell: UITableViewCell {
 
 // MARK: - Public API
 extension CryptoCoinTableViewCell {
-    func configure(with coin: CriptoCoinRepresentable) {
+    func configure(with coin: GeckoCriptoCoin?) {
         // TODO: - Replace with propiate image
         coinImageView.image = UIImage(systemName: "bitcoinsign.circle.fill")
-        nameLabel.text = coin.name
-        currentPriceLabel.text = "Current Price: \(coin.currentPrice)"
-        lastUpdatedLabel.text = "Last Updated: \(coin.lastUpdated)"
-        symbolLabel.text = coin.symbol
+        nameLabel.text = coin?.name
+        currentPriceLabel.text = "Price: \(coin!.current_price)"
+        lastUpdatedLabel.text = "Updated: \(coin!.last_updated)"
+        symbolLabel.text = coin?.symbol
     }
 }
 
@@ -80,6 +80,12 @@ extension CryptoCoinTableViewCell {
 private extension CryptoCoinTableViewCell {
     
     func setupViews() {
+        contentView.addSubview(coinImageView)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(currentPriceLabel)
+        contentView.addSubview(lastUpdatedLabel)
+        contentView.addSubview(symbolLabel)
+        
         
         // Defining Stack Views
         let nameAndPriceSV: UIStackView = UIStackView(arrangedSubviews: [nameLabel, currentPriceLabel])
@@ -99,26 +105,18 @@ private extension CryptoCoinTableViewCell {
         rootSV.translatesAutoresizingMaskIntoConstraints = false
         rootSV.distribution = .fillProportionally
         rootSV.alignment = .fill
-        
+        contentView.addSubview(rootSV)
         
         NSLayoutConstraint.activate([
             // Image
-            coinImageView.widthAnchor.constraint(equalToConstant: 50),
-            coinImageView.heightAnchor.constraint(equalToConstant: 50),
+            coinImageView.widthAnchor.constraint(equalToConstant: 40),
+            coinImageView.heightAnchor.constraint(equalToConstant: 40),
             // Root Stack View
-            rootSV.heightAnchor.constraint(greaterThanOrEqualToConstant: 60),
             rootSV.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             rootSV.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
             rootSV.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
             rootSV.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
             
         ])
-        
-        contentView.addSubview(coinImageView)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(currentPriceLabel)
-        contentView.addSubview(lastUpdatedLabel)
-        contentView.addSubview(symbolLabel)
-        contentView.addSubview(rootSV)
     }
 }
