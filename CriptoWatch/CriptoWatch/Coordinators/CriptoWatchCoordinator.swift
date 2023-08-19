@@ -28,7 +28,7 @@ class CriptoWatchCoordinator: Coordinator {
         
         // Applying style to navigation bar
         navigationController.navigationBar.tintColor = .systemBlue
-        navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGray]
+        navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemTeal]
         
         // Show Cripto List
         showCryptoCoinsList()

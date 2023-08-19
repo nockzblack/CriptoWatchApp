@@ -22,7 +22,6 @@ final class CriptoCoinsListVC: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.backgroundColor = UIColor.red
         tableView.register(CryptoCoinTableViewCell.self, forCellReuseIdentifier: CryptoCoinTableViewCell.reuseIdentifier)
         return tableView
     }()
@@ -42,6 +41,9 @@ final class CriptoCoinsListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Configuring title
+        title = "Crypto Coins"
         
         // Table View
         setupTableView()
