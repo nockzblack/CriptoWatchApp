@@ -11,7 +11,14 @@ final class CriptoCoinsListVC: UIViewController {
     
     
     // MARK: - Properties
-    private let tableView: UITableView = UITableView()
+    
+    private let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = UIColor.red
+        tableView.register(CryptoCoinTableViewCell.self, forCellReuseIdentifier: CryptoCoinTableViewCell.reuseIdentifier)
+        return tableView
+    }()
     
     
     // MARK: - View Life Cycle
@@ -29,9 +36,10 @@ final class CriptoCoinsListVC: UIViewController {
     
     private func setupTableView() {
         self.view.addSubview(tableView)
-        tableView.backgroundColor = UIColor.red
+        tableView.dataSource = self
+        tableView.delegate = self
+        
         // Layout
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             // Vertical Layout
             tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
