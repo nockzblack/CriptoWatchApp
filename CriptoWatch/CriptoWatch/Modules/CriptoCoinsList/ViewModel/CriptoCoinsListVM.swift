@@ -45,8 +45,6 @@ final class CriptoCoinsListVM {
     
     init() {
         cryptoCoinsData = []
-        // Fetch Crypto Coin Data
-        fetchCriptoCoinData(with: GeckoAPI.getURL(for: .usd))
     }
     
     
@@ -57,6 +55,10 @@ final class CriptoCoinsListVM {
 
 extension CriptoCoinsListVM {
     
+    func startFetchingData() {
+        // Fetch Crypto Coin Data
+        fetchCriptoCoinData(with: GeckoAPI.getURL(for: .usd))
+    }
 
 }
 

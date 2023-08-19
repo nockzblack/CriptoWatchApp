@@ -10,15 +10,18 @@ import UIKit
 // MARK: - Table View Data Source
 extension CriptoCoinsListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return viewModel?.numberOfCryptoCoins ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CryptoCoinTableViewCell.reuseIdentifier, for: indexPath) as? CryptoCoinTableViewCell else { fatalError("Unexpected Index Path")
         }
         
-        // TODO: Configure Cell
+        // Validating view model
+        guard let viewModel = viewModel else { fatalError("No view model present") }
         
+        // Configuring Cell
+        cell.configure(with: viewModel.cryptoCoinsData?[indexPath.row])
         return cell
     }
     

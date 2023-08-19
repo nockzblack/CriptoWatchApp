@@ -51,8 +51,11 @@ class CriptoWatchCoordinator: Coordinator {
     
     private func showCryptoCoinsList() {
         
+        
+        let coinsListViewModel = CriptoCoinsListVM()
         // Initializing Cripto Coins List View Controller
         let coinsListVC = CriptoCoinsListVC()
+        coinsListVC.viewModel = coinsListViewModel
         
         // Push Coins List View Controller Onto Navigation Stack
         navigationController.pushViewController(coinsListVC, animated: true)
