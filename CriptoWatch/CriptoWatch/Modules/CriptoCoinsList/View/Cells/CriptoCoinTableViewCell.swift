@@ -16,6 +16,9 @@ final class CryptoCoinTableViewCell: UITableViewCell {
     }
     
     // MARK: - Properties
+    private lazy var imageService = ImageService()
+    private var imageRequest: Cancellable?
+    
     private let coinImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -51,11 +54,22 @@ final class CryptoCoinTableViewCell: UITableViewCell {
         return label
     }()
     
-    // MARK: - Initializers
+    // MARK: - Overrides
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        // Reset thumbnail image view
+        coinImageView.image = nil
+        
+        // Cancel image request
+        imageRequest?.cancel()
+    }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -66,12 +80,17 @@ final class CryptoCoinTableViewCell: UITableViewCell {
 // MARK: - Public API
 extension CryptoCoinTableViewCell {
     func configure(with coin: GeckoCriptoCoin?) {
-        // TODO: - Replace with propiate image
-        coinImageView.image = UIImage(systemName: "bitcoinsign.circle.fill")
         nameLabel.text = coin?.name
-        currentPriceLabel.text = "Price: \(coin!.current_price)"
+        currentPriceLabel.text = "\(coin!.current_price)"
         lastUpdatedLabel.text = "Updated: \(coin!.last_updated)"
         symbolLabel.text = coin?.symbol
+        
+        let url = URL(string: coin?.image ?? "")
+        // Request image using image service
+        imageRequest = imageService.image(for: url!) { [weak self] image in
+            // Update thumbnail image view
+            self?.coinImageView.image = image
+        }
     }
 }
 
@@ -103,19 +122,17 @@ private extension CryptoCoinTableViewCell {
         rootSV.spacing = 10
         rootSV.axis = .horizontal
         rootSV.translatesAutoresizingMaskIntoConstraints = false
-        rootSV.distribution = .fillProportionally
-        rootSV.alignment = .fill
         contentView.addSubview(rootSV)
         
         NSLayoutConstraint.activate([
             // Image
-            coinImageView.widthAnchor.constraint(equalToConstant: 40),
-            coinImageView.heightAnchor.constraint(equalToConstant: 40),
+            coinImageView.widthAnchor.constraint(equalToConstant: 50),
+            coinImageView.heightAnchor.constraint(equalToConstant: 50),
             // Root Stack View
-            rootSV.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            rootSV.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-            rootSV.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-            rootSV.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+            rootSV.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            rootSV.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            rootSV.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            rootSV.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
             
         ])
     }
