@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - Table View Data Source
-extension CriptoCoinsListVC: UITableViewDataSource {
+extension CryptoCoinsListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.numberOfCryptoCoins ?? 0
     }
@@ -29,6 +29,6 @@ extension CriptoCoinsListVC: UITableViewDataSource {
 }
 
 // MARK: - Table View Delegate
-extension CriptoCoinsListVC: UITableViewDelegate {
+extension CryptoCoinsListVC: UITableViewDelegate {
     
 }

@@ -1,5 +1,5 @@
 //
-//  CriptoCoinsListVM.swift
+//  CryptoCoinsListVM.swift
 //  CriptoWatch
 //
 //  Created by Fernando Benavides on 19/08/23.
@@ -13,7 +13,7 @@ enum source {
     case api
 }
 
-final class CriptoCoinsListVM {
+final class CryptoCoinsListVM {
     
     // MARK: - Inner Types
     
@@ -53,11 +53,11 @@ final class CriptoCoinsListVM {
 
 // MARK: - Public API
 
-extension CriptoCoinsListVM {
+extension CryptoCoinsListVM {
     
     func startFetchingData() {
         // Fetch Crypto Coin Data
-        fetchCriptoCoinData(with: GeckoAPI.getURL(for: .usd))
+        fetchCryptoCoinData(with: GeckoAPI.getURL(for: .usd))
     }
 
 }
@@ -65,8 +65,8 @@ extension CriptoCoinsListVM {
 
 // MARK: - Private API
 
-private extension CriptoCoinsListVM {
-    func fetchCriptoCoinData(with url: URL) {
+private extension CryptoCoinsListVM {
+    func fetchCryptoCoinData(with url: URL) {
         // Creating data taks
         URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
             // Informing Http response code
@@ -84,6 +84,7 @@ private extension CriptoCoinsListVM {
                 
                 // Initializing JSON Decoder
                 let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 
                 do {
                     // Decoding JSON data

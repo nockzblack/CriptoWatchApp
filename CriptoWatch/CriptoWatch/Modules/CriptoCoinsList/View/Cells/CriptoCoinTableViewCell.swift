@@ -81,8 +81,8 @@ final class CryptoCoinTableViewCell: UITableViewCell {
 extension CryptoCoinTableViewCell {
     func configure(with coin: GeckoCriptoCoin?) {
         nameLabel.text = coin?.name
-        currentPriceLabel.text = "\(coin!.current_price)"
-        lastUpdatedLabel.text = "Updated: \(coin!.last_updated)"
+        currentPriceLabel.text = "\(coin!.currentPrice)"
+        lastUpdatedLabel.text = "Updated: \(coin!.lastUpdated)"
         symbolLabel.text = coin?.symbol
         
         let url = URL(string: coin?.image ?? "")

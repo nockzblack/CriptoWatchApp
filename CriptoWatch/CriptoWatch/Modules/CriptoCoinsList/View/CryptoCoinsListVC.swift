@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CriptoCoinsListVC: UIViewController {
+final class CryptoCoinsListVC: UIViewController {
     
     // MARK: - Inner Types
     
@@ -23,10 +23,21 @@ final class CriptoCoinsListVC: UIViewController {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(CryptoCoinTableViewCell.self, forCellReuseIdentifier: CryptoCoinTableViewCell.reuseIdentifier)
+        tableView.isHidden = true
         return tableView
     }()
     
-    var viewModel: CriptoCoinsListVM? {
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndecator = UIActivityIndicatorView()
+        activityIndecator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndecator.hidesWhenStopped = true
+        activityIndecator.style = .large
+        activityIndecator.isHidden = false
+        activityIndecator.startAnimating()
+        return activityIndecator
+    }()
+    
+    var viewModel: CryptoCoinsListVM? {
         didSet {
             guard let viewModel = viewModel else { return }
             
@@ -42,16 +53,30 @@ final class CriptoCoinsListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Configuring title
+        // Configuring View Controller
         title = "Crypto Coins"
+        view.backgroundColor = .white
+        
         
         // Table View
         setupTableView()
+        // Activity Indicator
+        setupActivityIndicator()
     }
     
 }
 
-private extension CriptoCoinsListVC {
+private extension CryptoCoinsListVC {
+    
+    private func setupActivityIndicator() {
+        self.view.addSubview(activityIndicatorView)
+        // Layout
+        NSLayoutConstraint.activate([
+            // Center
+            activityIndicatorView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
+        ])
+    }
     
     // MARK: Private API
     
@@ -71,7 +96,7 @@ private extension CriptoCoinsListVC {
         ])
     }
     
-    private func setupViewModel(with viewModel: CriptoCoinsListVM) {
+    private func setupViewModel(with viewModel: CryptoCoinsListVM) {
         viewModel.startFetchingData()
         // Configure view model
         viewModel.didFetchCryptoCoinData = { [weak self] (criptoCoinsData, error) in
@@ -87,11 +112,11 @@ private extension CriptoCoinsListVC {
             } else if let _ = criptoCoinsData {
                 DispatchQueue.main.async {
                     // Stop animation
-                    //self?.activityIndicatorView.stopAnimating()
+                    self?.activityIndicatorView.stopAnimating()
                     
                     // Update collection view
                     self?.tableView.reloadData()
-                    //self?.tableView.isHidden = false
+                    self?.tableView.isHidden = false
                 }
             } else {
                 // Notify User

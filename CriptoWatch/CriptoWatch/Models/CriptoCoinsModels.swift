@@ -14,11 +14,13 @@ struct GeckoCriptoCoin: Codable {
     let symbol: String
     let name: String
     let image: String
-    let current_price: Double
-    let last_updated: String
-    let total_volume: Double
-    let high_24h: Double
-    let low_24h: Double
-    let price_change_percentage_24h: Double
-    let market_cap: Double
+    let currentPrice: Double
+    let lastUpdated: String
+    let totalVolume: Double
+    let high24H: Double
+    let low24H: Double
+    let priceChangePercentage24H: Double
+    let marketCap: Double
+    
+    
 }

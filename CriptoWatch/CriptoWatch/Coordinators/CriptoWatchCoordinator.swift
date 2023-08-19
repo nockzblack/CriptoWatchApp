@@ -16,9 +16,7 @@ class CriptoWatchCoordinator: Coordinator {
     
     // MARK: - Computed Properties
     
-    var rootViewController: UIViewController {
-        return navigationController
-    }
+    var rootViewController: UIViewController { return navigationController }
     
     
     // MARK: - Overrides
@@ -50,11 +48,11 @@ class CriptoWatchCoordinator: Coordinator {
     // MARK: - Private API
     
     private func showCryptoCoinsList() {
+        // Initalizing Crypto Coins List View Model
+        let coinsListViewModel = CryptoCoinsListVM()
         
-        
-        let coinsListViewModel = CriptoCoinsListVM()
         // Initializing Cripto Coins List View Controller
-        let coinsListVC = CriptoCoinsListVC()
+        let coinsListVC = CryptoCoinsListVC()
         coinsListVC.viewModel = coinsListViewModel
         
         // Push Coins List View Controller Onto Navigation Stack
