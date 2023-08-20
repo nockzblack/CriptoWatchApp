@@ -103,6 +103,7 @@ private extension CryptoCoinsListVM {
                     }
                     
                     // Seting comics data
+                    self?.cryptoCoinsData.removeAll()
                     self?.cryptoCoinsData.append(contentsOf: geckoResponse)
                     
                     // Invoking completation handler
