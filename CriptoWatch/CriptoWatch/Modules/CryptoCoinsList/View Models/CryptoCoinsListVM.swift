@@ -22,6 +22,12 @@ final class CryptoCoinsListVM {
         case noResultsFromQuery
     }
     
+    enum SortOptions {
+        case name
+        case marketCap
+        case price
+    }
+    
     // MARK: - Type Aliases
     
     typealias DidFetchCryptoCoinsDataCompletion = ([GeckoCryptoCoin]?, CryptoDataError?) -> Void
@@ -61,6 +67,17 @@ extension CryptoCoinsListVM {
     func viewModel(for index: Int) -> CryptoCoinVM {
         // Making a Crypto Coin View Model
         CryptoCoinVM(cryptoCoinData: cryptoCoinsData[index], currency: currency)
+    }
+    
+    func sortCryptoCoins(by sort: SortOptions) {
+        switch sort {
+            case .name:
+                cryptoCoinsData.sort { $0.name < $1.name }
+            case .marketCap:
+                cryptoCoinsData.sort { $0.marketCap > $1.marketCap }
+            case .price:
+                cryptoCoinsData.sort { $0.currentPrice > $1.currentPrice }
+        }
     }
 
 }

@@ -73,7 +73,8 @@ final class CryptoCoinsListVC: UIViewController {
         setupActivityIndicator()
         // Currency Bar Item
         let currencyItem = configCurrencyItem()
-        navigationItem.rightBarButtonItems = [currencyItem]
+        let sortItem = configSortItem()
+        navigationItem.rightBarButtonItems = [currencyItem, sortItem]
     }
     
 }
@@ -116,7 +117,34 @@ private extension CryptoCoinsListVC {
         return barItem
     }
     
-
+    func configSortItem() -> UIBarButtonItem  {
+        let arrowosImages = UIImage(systemName: "arrow.up.arrow.down")
+        let barItem = UIBarButtonItem(image: arrowosImages, style: .plain, target: self, action:nil)
+        barItem.primaryAction = nil
+        
+        // Create Sort mdoes Action
+        let nameOption = UIAction(title: "Name", image: UIImage(systemName: "character.book.closed.fill")) { _ in
+            self.viewModel?.sortCryptoCoins(by: .name)
+            self.tableView.reloadData()
+        }
+        
+        let priceOption = UIAction(title: "Price", image: UIImage(systemName: "dollarsign")) { _ in
+            self.viewModel?.sortCryptoCoins(by: .price)
+            self.tableView.reloadData()
+        }
+        
+        let marketCapOption = UIAction(title: "Market Cap", image: UIImage(systemName: "chart.pie.fill")) { _ in
+            self.viewModel?.sortCryptoCoins(by: .marketCap)
+            self.tableView.reloadData()
+        }
+        
+        // Return a UIMenu with the action items
+        let menu = UIMenu(title: "Sort by", children: [nameOption, priceOption, marketCapOption])
+        // Set Menu to Bar Items
+        barItem.menu = menu
+        
+        return barItem
+    }
     
     func setupActivityIndicator() {
         self.view.addSubview(activityIndicatorView)
