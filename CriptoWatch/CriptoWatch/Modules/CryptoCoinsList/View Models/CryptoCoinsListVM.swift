@@ -22,6 +22,12 @@ final class CryptoCoinsListVM {
         case noResultsFromQuery
     }
     
+    enum SortOptions {
+        case name
+        case marketCap
+        case price
+    }
+    
     // MARK: - Type Aliases
     
     typealias DidFetchCryptoCoinsDataCompletion = ([GeckoCryptoCoin]?, CryptoDataError?) -> Void
@@ -33,6 +39,8 @@ final class CryptoCoinsListVM {
     
     var cryptoCoinsData: [GeckoCryptoCoin]
     
+    var currency: Currency
+    
     // MARK: - Computed Properties
     
     var numberOfCryptoCoins: Int { cryptoCoinsData.count }
@@ -41,6 +49,7 @@ final class CryptoCoinsListVM {
     
     init() {
         cryptoCoinsData = []
+        currency = .usd
     }
     
 }
@@ -52,12 +61,23 @@ extension CryptoCoinsListVM {
     
     func startFetchingData() {
         // Fetch Crypto Coin Data
-        fetchCryptoCoinData(with: GeckoAPI.getURL(for: .usd))
+        fetchCryptoCoinData(with: GeckoAPI.getURL(for: currency))
     }
     
     func viewModel(for index: Int) -> CryptoCoinVM {
         // Making a Crypto Coin View Model
-        CryptoCoinVM(cryptoCoinData: cryptoCoinsData[index], currency: .usd)
+        CryptoCoinVM(cryptoCoinData: cryptoCoinsData[index], currency: currency)
+    }
+    
+    func sortCryptoCoins(by sort: SortOptions) {
+        switch sort {
+            case .name:
+                cryptoCoinsData.sort { $0.name < $1.name }
+            case .marketCap:
+                cryptoCoinsData.sort { $0.marketCap > $1.marketCap }
+            case .price:
+                cryptoCoinsData.sort { $0.currentPrice > $1.currentPrice }
+        }
     }
 
 }
@@ -100,6 +120,7 @@ private extension CryptoCoinsListVM {
                     }
                     
                     // Seting comics data
+                    self?.cryptoCoinsData.removeAll()
                     self?.cryptoCoinsData.append(contentsOf: geckoResponse)
                     
                     // Invoking completation handler

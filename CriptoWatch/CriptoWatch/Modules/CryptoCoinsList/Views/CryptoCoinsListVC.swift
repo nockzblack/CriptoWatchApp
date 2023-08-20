@@ -71,8 +71,10 @@ final class CryptoCoinsListVC: UIViewController {
         setupTableView()
         // Activity Indicator
         setupActivityIndicator()
-        
-        
+        // Currency Bar Item
+        let currencyItem = configCurrencyItem()
+        let sortItem = configSortItem()
+        navigationItem.rightBarButtonItems = [currencyItem, sortItem]
     }
     
 }
@@ -83,6 +85,65 @@ private extension CryptoCoinsListVC {
     
     @objc private func fetchNewData(_ sender: Any) {
         viewModel?.startFetchingData()
+    }
+    
+    func configCurrencyItem() -> UIBarButtonItem {
+        let dollarImages = UIImage(systemName: "dollarsign.arrow.circlepath")
+        let barItem = UIBarButtonItem(image: dollarImages, style: .plain, target: self, action: nil)
+        barItem.primaryAction = nil
+        
+        // Create Three Action Items
+        let USDOption = UIAction(title: "USD") { _ in
+            self.viewModel?.currency = .usd
+            self.viewModel?.startFetchingData()
+        }
+        
+        let EUROption = UIAction(title: "EUR") { _ in
+            self.viewModel?.currency = .eur
+            self.viewModel?.startFetchingData()
+        }
+        
+        let MXNOption = UIAction(title: "MXN") { _ in
+            self.viewModel?.currency = .mxn
+            self.viewModel?.startFetchingData()
+        }
+        
+        // Create Menu with Action Items
+        let menu = UIMenu(title: "Currency", children: [USDOption, EUROption, MXNOption])
+        
+        // Set Menu to Bar Items
+        barItem.menu = menu
+        
+        return barItem
+    }
+    
+    func configSortItem() -> UIBarButtonItem  {
+        let arrowosImages = UIImage(systemName: "arrow.up.arrow.down")
+        let barItem = UIBarButtonItem(image: arrowosImages, style: .plain, target: self, action:nil)
+        barItem.primaryAction = nil
+        
+        // Create Sort mdoes Action
+        let nameOption = UIAction(title: "Name", image: UIImage(systemName: "character.book.closed.fill")) { _ in
+            self.viewModel?.sortCryptoCoins(by: .name)
+            self.tableView.reloadData()
+        }
+        
+        let priceOption = UIAction(title: "Price", image: UIImage(systemName: "dollarsign")) { _ in
+            self.viewModel?.sortCryptoCoins(by: .price)
+            self.tableView.reloadData()
+        }
+        
+        let marketCapOption = UIAction(title: "Market Cap", image: UIImage(systemName: "chart.pie.fill")) { _ in
+            self.viewModel?.sortCryptoCoins(by: .marketCap)
+            self.tableView.reloadData()
+        }
+        
+        // Return a UIMenu with the action items
+        let menu = UIMenu(title: "Sort by", children: [nameOption, priceOption, marketCapOption])
+        // Set Menu to Bar Items
+        barItem.menu = menu
+        
+        return barItem
     }
     
     func setupActivityIndicator() {
