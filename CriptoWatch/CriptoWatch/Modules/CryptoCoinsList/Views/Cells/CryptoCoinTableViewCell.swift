@@ -79,16 +79,20 @@ final class CryptoCoinTableViewCell: UITableViewCell {
 
 // MARK: - Public API
 extension CryptoCoinTableViewCell {
-    func configure(with coin: GeckoCriptoCoin?) {
-        nameLabel.text = coin?.name
-        currentPriceLabel.text = "\(coin!.currentPrice)"
-        lastUpdatedLabel.text = "Updated: \(coin!.lastUpdated)"
-        symbolLabel.text = coin?.symbol
+    func configure(with representable: CryptoCoinRepresentable) {
+        nameLabel.text = representable.name
+        currentPriceLabel.text = representable.currentPrice
+        lastUpdatedLabel.text = "Updated: \(representable.lastUpdated)"
+        symbolLabel.text = representable.symbol
         
-        let url = URL(string: coin?.image ?? "")
+        guard let validImageUrl = representable.image else {
+            coinImageView.image = UIImage(systemName: "dollarsign.circle.fill")
+            return
+        }
+        
         // Request image using image service
-        imageRequest = imageService.image(for: url!) { [weak self] image in
-            // Update thumbnail image view
+        imageRequest = imageService.image(for: validImageUrl) { [weak self] image in
+            // Update image view
             self?.coinImageView.image = image
         }
     }

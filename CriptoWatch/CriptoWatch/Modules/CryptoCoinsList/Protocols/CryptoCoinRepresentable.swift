@@ -10,7 +10,7 @@ import Foundation
 protocol CryptoCoinRepresentable {
     var name: String { get }
     var symbol: String { get }
-    var currentPrice: Double { get }
+    var currentPrice: String { get }
     var lastUpdated: String { get }
-    var image: String { get }
+    var image: URL? { get }
 }

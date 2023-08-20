@@ -54,6 +54,11 @@ extension CryptoCoinsListVM {
         // Fetch Crypto Coin Data
         fetchCryptoCoinData(with: GeckoAPI.getURL(for: .usd))
     }
+    
+    func viewModel(for index: Int) -> CryptoCoinVM {
+        // Making a Crypto Coin View Model
+        CryptoCoinVM(cryptoCoinData: cryptoCoinsData[index], currency: .usd)
+    }
 
 }
 

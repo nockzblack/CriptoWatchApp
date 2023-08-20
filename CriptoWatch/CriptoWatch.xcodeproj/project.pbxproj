@@ -23,6 +23,7 @@
 		C14171C42A90E40D00489382 /* GeckoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171C32A90E40D00489382 /* GeckoAPI.swift */; };
 		C14171C72A90F4A100489382 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171C62A90F4A100489382 /* ImageService.swift */; };
 		C14171C92A90F4D100489382 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171C82A90F4D100489382 /* Cancellable.swift */; };
+		C14171CD2A915BC400489382 /* CryptoCoinVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171CC2A915BC400489382 /* CryptoCoinVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		C14171C32A90E40D00489382 /* GeckoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeckoAPI.swift; sourceTree = "<group>"; };
 		C14171C62A90F4A100489382 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		C14171C82A90F4D100489382 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
+		C14171CC2A915BC400489382 /* CryptoCoinVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCoinVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

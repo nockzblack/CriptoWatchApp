@@ -21,7 +21,7 @@ extension CryptoCoinsListVC: UITableViewDataSource {
         guard let viewModel = viewModel else { fatalError("No view model present") }
         
         // Configuring Cell
-        cell.configure(with: viewModel.cryptoCoinsData?[indexPath.row])
+        cell.configure(with: viewModel.viewModel(for:indexPath.row))
         return cell
     }
     
