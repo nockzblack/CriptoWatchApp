@@ -13,7 +13,7 @@
 		C141719A2A8ECE7B00489382 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C14171992A8ECE7B00489382 /* Assets.xcassets */; };
 		C141719D2A8ECE7B00489382 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C141719B2A8ECE7B00489382 /* LaunchScreen.storyboard */; };
 		C14171AC2A8ED79400489382 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171AB2A8ED79400489382 /* Coordinator.swift */; };
-		C14171AE2A8ED91700489382 /* CriptoWatchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171AD2A8ED91700489382 /* CriptoWatchCoordinator.swift */; };
+		C14171AE2A8ED91700489382 /* CryptoWatchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171AD2A8ED91700489382 /* CryptoWatchCoordinator.swift */; };
 		C14171B22A8FB6AB00489382 /* CryptoCoinsListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171B12A8FB6AB00489382 /* CryptoCoinsListVC.swift */; };
 		C14171B82A90CEC900489382 /* CryptoCoinTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171B72A90CEC900489382 /* CryptoCoinTableViewCell.swift */; };
 		C14171BB2A90D0F800489382 /* CryptoCoinRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171BA2A90D0F800489382 /* CryptoCoinRepresentable.swift */; };
@@ -35,7 +35,7 @@
 		C141719C2A8ECE7B00489382 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C141719E2A8ECE7B00489382 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C14171AB2A8ED79400489382 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		C14171AD2A8ED91700489382 /* CriptoWatchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CriptoWatchCoordinator.swift; sourceTree = "<group>"; };
+		C14171AD2A8ED91700489382 /* CryptoWatchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoWatchCoordinator.swift; sourceTree = "<group>"; };
 		C14171B02A8FAF8800489382 /* CoinGeckoAPI.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = CoinGeckoAPI.playground; path = ../CoinGeckoAPI.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C14171B12A8FB6AB00489382 /* CryptoCoinsListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCoinsListVC.swift; sourceTree = "<group>"; };
 		C14171B72A90CEC900489382 /* CryptoCoinTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCoinTableViewCell.swift; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				C14171AB2A8ED79400489382 /* Coordinator.swift */,
-				C14171AD2A8ED91700489382 /* CriptoWatchCoordinator.swift */,
+				C14171AD2A8ED91700489382 /* CryptoWatchCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -322,7 +322,7 @@
 				C14171B82A90CEC900489382 /* CryptoCoinTableViewCell.swift in Sources */,
 				C14171AC2A8ED79400489382 /* Coordinator.swift in Sources */,
 				C14171BF2A90E2CA00489382 /* GeckoCryptoCoin.swift in Sources */,
-				C14171AE2A8ED91700489382 /* CriptoWatchCoordinator.swift in Sources */,
+				C14171AE2A8ED91700489382 /* CryptoWatchCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
