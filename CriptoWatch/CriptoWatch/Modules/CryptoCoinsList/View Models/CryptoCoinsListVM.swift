@@ -33,6 +33,8 @@ final class CryptoCoinsListVM {
     
     var cryptoCoinsData: [GeckoCryptoCoin]
     
+    var currency: Currency
+    
     // MARK: - Computed Properties
     
     var numberOfCryptoCoins: Int { cryptoCoinsData.count }
@@ -41,6 +43,7 @@ final class CryptoCoinsListVM {
     
     init() {
         cryptoCoinsData = []
+        currency = .usd
     }
     
 }
@@ -52,12 +55,12 @@ extension CryptoCoinsListVM {
     
     func startFetchingData() {
         // Fetch Crypto Coin Data
-        fetchCryptoCoinData(with: GeckoAPI.getURL(for: .usd))
+        fetchCryptoCoinData(with: GeckoAPI.getURL(for: currency))
     }
     
     func viewModel(for index: Int) -> CryptoCoinVM {
         // Making a Crypto Coin View Model
-        CryptoCoinVM(cryptoCoinData: cryptoCoinsData[index], currency: .usd)
+        CryptoCoinVM(cryptoCoinData: cryptoCoinsData[index], currency: currency)
     }
 
 }

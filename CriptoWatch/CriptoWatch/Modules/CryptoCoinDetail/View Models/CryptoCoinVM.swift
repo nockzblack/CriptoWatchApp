@@ -12,7 +12,7 @@ struct CryptoCoinVM {
     // MARK: - Properties
     
     let cryptoCoinData: GeckoCryptoCoin
-    let currency: GeckoAPI.Currency
+    let currency: Currency
     
     private let dateFormatter: DateFormatter = {
         let formater = DateFormatter()
@@ -28,7 +28,7 @@ struct CryptoCoinVM {
     }()
     
     
-    init(cryptoCoinData: GeckoCryptoCoin, currency: GeckoAPI.Currency) {
+    init(cryptoCoinData: GeckoCryptoCoin, currency: Currency) {
         self.cryptoCoinData = cryptoCoinData
         self.currency = currency
         currencyFormatter.currencyCode = currency.rawValue.uppercased()
