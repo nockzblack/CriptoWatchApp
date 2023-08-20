@@ -37,6 +37,16 @@ final class CryptoCoinsListVC: UIViewController {
         return activityIndecator
     }()
     
+    private let refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 14, weight: .thin)
+        ]
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching Crypto Data ...", attributes: attributes)
+        return refreshControl
+    }()
+    
     var viewModel: CryptoCoinsListVM? {
         didSet {
             guard let viewModel = viewModel else { return }
@@ -57,11 +67,12 @@ final class CryptoCoinsListVC: UIViewController {
         title = "Crypto Coins"
         view.backgroundColor = .white
         
-        
         // Table View
         setupTableView()
         // Activity Indicator
         setupActivityIndicator()
+        
+        
     }
     
 }
@@ -69,6 +80,10 @@ final class CryptoCoinsListVC: UIViewController {
 
 // MARK: Private API
 private extension CryptoCoinsListVC {
+    
+    @objc private func fetchNewData(_ sender: Any) {
+        viewModel?.startFetchingData()
+    }
     
     func setupActivityIndicator() {
         self.view.addSubview(activityIndicatorView)
@@ -84,7 +99,9 @@ private extension CryptoCoinsListVC {
         self.view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
-        
+        tableView.refreshControl = refreshControl
+        // Configure Refresh Control
+        refreshControl.addTarget(self, action: #selector(fetchNewData(_:)), for: .valueChanged)
         // Layout
         NSLayoutConstraint.activate([
             // Vertical Layout
@@ -113,9 +130,9 @@ private extension CryptoCoinsListVC {
                 DispatchQueue.main.async {
                     // Stop animation
                     self?.activityIndicatorView.stopAnimating()
-                    
                     // Update collection view
                     self?.tableView.reloadData()
+                    self?.refreshControl.endRefreshing()
                     self?.tableView.isHidden = false
                 }
             } else {
@@ -125,7 +142,7 @@ private extension CryptoCoinsListVC {
         }
     }
     
-    func presentAlert(of alertType: AlertType) {
+    private func presentAlert(of alertType: AlertType) {
         // Helpers
         let title: String
         let message: String

@@ -1,5 +1,5 @@
 //
-//  CriptoWatchCoordinator.swift
+//  CryptoWatchCoordinator.swift
 //  CriptoWatch
 //
 //  Created by Fernando Benavides on 18/08/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CriptoWatchCoordinator: Coordinator {
+class CryptoWatchCoordinator: Coordinator {
     
     // MARK: - Properties
     
