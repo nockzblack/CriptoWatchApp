@@ -80,7 +80,10 @@ private extension CryptoCoinsListVM {
                 // Initializing JSON Decoder
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                
+                let dateFormatted = DateFormatter()
+                dateFormatted.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                decoder.dateDecodingStrategy = .formatted(dateFormatted)
+        
                 do {
                     // Decoding JSON data
                     let geckoResponse = try decoder.decode([GeckoCryptoCoin].self, from: data)

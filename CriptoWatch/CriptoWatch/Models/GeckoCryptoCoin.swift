@@ -15,7 +15,7 @@ struct GeckoCryptoCoin: Codable {
     let name: String
     let image: String
     let currentPrice: Double
-    let lastUpdated: String
+    let lastUpdated: Date
     let totalVolume: Double
     let high24H: Double
     let low24H: Double
