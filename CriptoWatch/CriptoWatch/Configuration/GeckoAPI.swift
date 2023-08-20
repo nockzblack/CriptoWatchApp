@@ -20,7 +20,6 @@ enum GeckoAPI {
     private static var basePath = "https://api.coingecko.com/api/v3/"
     private static var coinsMarketsQuery = basePath + "coins/markets"
     
-    
     // MARK: - Computed Static Properties API
     
     static func getURL(for currency: Currency) -> URL {
@@ -29,5 +28,4 @@ enum GeckoAPI {
         }
         return url
     }
-    
 }

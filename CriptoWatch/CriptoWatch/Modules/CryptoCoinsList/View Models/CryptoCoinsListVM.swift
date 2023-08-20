@@ -22,31 +22,26 @@ final class CryptoCoinsListVM {
         case noResultsFromQuery
     }
     
-    
     // MARK: - Type Aliases
     
-    typealias DidFetchCryptoCoinsDataCompletion = ([GeckoCriptoCoin]?, CryptoDataError?) -> Void
+    typealias DidFetchCryptoCoinsDataCompletion = ([GeckoCryptoCoin]?, CryptoDataError?) -> Void
     
     
     // MARK: - Stored Properties
     
     var didFetchCryptoCoinData: DidFetchCryptoCoinsDataCompletion?
     
-    var cryptoCoinsData: [GeckoCriptoCoin]?
+    var cryptoCoinsData: [GeckoCryptoCoin]
     
     // MARK: - Computed Properties
     
-    var numberOfCryptoCoins: Int {
-        return cryptoCoinsData?.count ?? 0
-    }
-    
+    var numberOfCryptoCoins: Int { cryptoCoinsData.count }
     
     // MARK: - Initializers
     
     init() {
         cryptoCoinsData = []
     }
-    
     
 }
 
@@ -88,7 +83,7 @@ private extension CryptoCoinsListVM {
                 
                 do {
                     // Decoding JSON data
-                    let geckoResponse = try decoder.decode([GeckoCriptoCoin].self, from: data)
+                    let geckoResponse = try decoder.decode([GeckoCryptoCoin].self, from: data)
                     
                     // Check if there is results
                     if geckoResponse.isEmpty {
@@ -97,7 +92,7 @@ private extension CryptoCoinsListVM {
                     }
                     
                     // Seting comics data
-                    self?.cryptoCoinsData?.append(contentsOf: geckoResponse)
+                    self?.cryptoCoinsData.append(contentsOf: geckoResponse)
                     
                     // Invoking completation handler
                     self?.didFetchCryptoCoinData?(geckoResponse, nil)

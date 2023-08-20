@@ -1,5 +1,5 @@
 //
-//  CriptoCoinTableViewCell.swift
+//  CryptoCoinTableViewCell.swift
 //  CriptoWatch
 //
 //  Created by Fernando Benavides on 19/08/23.

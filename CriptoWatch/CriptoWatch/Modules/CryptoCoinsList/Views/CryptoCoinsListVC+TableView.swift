@@ -1,5 +1,5 @@
 //
-//  CriptoCoinsListVC+TableView.swift
+//  CryptoCoinsListVC+TableView.swift
 //  CriptoWatch
 //
 //  Created by Fernando Benavides on 19/08/23.
@@ -24,7 +24,6 @@ extension CryptoCoinsListVC: UITableViewDataSource {
         cell.configure(with: viewModel.cryptoCoinsData?[indexPath.row])
         return cell
     }
-    
     
 }
 

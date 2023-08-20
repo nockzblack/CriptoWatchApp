@@ -15,6 +15,4 @@ protocol Cancellable {
     
 }
 
-extension URLSessionTask: Cancellable {
-    
-}
+extension URLSessionTask: Cancellable { }

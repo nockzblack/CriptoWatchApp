@@ -66,9 +66,11 @@ final class CryptoCoinsListVC: UIViewController {
     
 }
 
+
+// MARK: Private API
 private extension CryptoCoinsListVC {
     
-    private func setupActivityIndicator() {
+    func setupActivityIndicator() {
         self.view.addSubview(activityIndicatorView)
         // Layout
         NSLayoutConstraint.activate([
@@ -78,9 +80,7 @@ private extension CryptoCoinsListVC {
         ])
     }
     
-    // MARK: Private API
-    
-    private func setupTableView() {
+    func setupTableView() {
         self.view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
@@ -96,7 +96,7 @@ private extension CryptoCoinsListVC {
         ])
     }
     
-    private func setupViewModel(with viewModel: CryptoCoinsListVM) {
+    func setupViewModel(with viewModel: CryptoCoinsListVM) {
         viewModel.startFetchingData()
         // Configure view model
         viewModel.didFetchCryptoCoinData = { [weak self] (criptoCoinsData, error) in
@@ -125,7 +125,7 @@ private extension CryptoCoinsListVC {
         }
     }
     
-    private func presentAlert(of alertType: AlertType) {
+    func presentAlert(of alertType: AlertType) {
         // Helpers
         let title: String
         let message: String
