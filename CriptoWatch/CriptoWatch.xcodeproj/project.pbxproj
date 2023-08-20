@@ -24,7 +24,6 @@
 		C14171C72A90F4A100489382 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171C62A90F4A100489382 /* ImageService.swift */; };
 		C14171C92A90F4D100489382 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171C82A90F4D100489382 /* Cancellable.swift */; };
 		C14171CD2A915BC400489382 /* CryptoCoinVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171CC2A915BC400489382 /* CryptoCoinVM.swift */; };
-		C14171D02A92233900489382 /* CryptoCoinsListVC+ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171CF2A92233900489382 /* CryptoCoinsListVC+ContextMenu.swift */; };
 		C14171D32A922C2200489382 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171D22A922C2200489382 /* Currency.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +48,6 @@
 		C14171C62A90F4A100489382 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		C14171C82A90F4D100489382 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 		C14171CC2A915BC400489382 /* CryptoCoinVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCoinVM.swift; sourceTree = "<group>"; };
-		C14171CF2A92233900489382 /* CryptoCoinsListVC+ContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CryptoCoinsListVC+ContextMenu.swift"; sourceTree = "<group>"; };
 		C14171D22A922C2200489382 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,7 +164,6 @@
 			children = (
 				C14171B62A90CE9700489382 /* Cells */,
 				C14171B12A8FB6AB00489382 /* CryptoCoinsListVC.swift */,
-				C14171CF2A92233900489382 /* CryptoCoinsListVC+ContextMenu.swift */,
 				C14171BC2A90D3A600489382 /* CryptoCoinsListVC+TableView.swift */,
 			);
 			path = Views;
@@ -335,7 +332,6 @@
 				C14171C12A90E34C00489382 /* CryptoCoinsListVM.swift in Sources */,
 				C14171BD2A90D3A600489382 /* CryptoCoinsListVC+TableView.swift in Sources */,
 				C14171B82A90CEC900489382 /* CryptoCoinTableViewCell.swift in Sources */,
-				C14171D02A92233900489382 /* CryptoCoinsListVC+ContextMenu.swift in Sources */,
 				C14171AC2A8ED79400489382 /* Coordinator.swift in Sources */,
 				C14171BF2A90E2CA00489382 /* GeckoCryptoCoin.swift in Sources */,
 				C14171AE2A8ED91700489382 /* CryptoWatchCoordinator.swift in Sources */,

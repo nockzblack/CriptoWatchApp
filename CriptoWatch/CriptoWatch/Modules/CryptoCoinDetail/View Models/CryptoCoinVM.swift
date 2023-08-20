@@ -23,6 +23,8 @@ struct CryptoCoinVM {
     private let currencyFormatter: NumberFormatter = {
         let formater = NumberFormatter()
         formater.numberStyle = .currencyISOCode
+        formater.minimumFractionDigits = 2
+        formater.maximumFractionDigits = 6
         formater.locale = Locale(identifier: "en_US")
         return formater
     }()
