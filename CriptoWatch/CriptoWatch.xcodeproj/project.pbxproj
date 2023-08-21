@@ -25,6 +25,7 @@
 		C14171C92A90F4D100489382 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171C82A90F4D100489382 /* Cancellable.swift */; };
 		C14171CD2A915BC400489382 /* CryptoCoinVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171CC2A915BC400489382 /* CryptoCoinVM.swift */; };
 		C14171D32A922C2200489382 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171D22A922C2200489382 /* Currency.swift */; };
+		C14171D82A94025500489382 /* CryptoDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171D72A94025500489382 /* CryptoDetailVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		C14171C82A90F4D100489382 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 		C14171CC2A915BC400489382 /* CryptoCoinVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCoinVM.swift; sourceTree = "<group>"; };
 		C14171D22A922C2200489382 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		C14171D72A94025500489382 /* CryptoDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDetailVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +222,7 @@
 		C14171CA2A915B3C00489382 /* CryptoCoinDetail */ = {
 			isa = PBXGroup;
 			children = (
+				C14171D62A94023E00489382 /* Views */,
 				C14171CB2A915B9F00489382 /* View Models */,
 			);
 			path = CryptoCoinDetail;
@@ -247,6 +250,14 @@
 				C14171D22A922C2200489382 /* Currency.swift */,
 			);
 			path = Types;
+			sourceTree = "<group>";
+		};
+		C14171D62A94023E00489382 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C14171D72A94025500489382 /* CryptoDetailVC.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,6 +343,7 @@
 				C14171C12A90E34C00489382 /* CryptoCoinsListVM.swift in Sources */,
 				C14171BD2A90D3A600489382 /* CryptoCoinsListVC+TableView.swift in Sources */,
 				C14171B82A90CEC900489382 /* CryptoCoinTableViewCell.swift in Sources */,
+				C14171D82A94025500489382 /* CryptoDetailVC.swift in Sources */,
 				C14171AC2A8ED79400489382 /* Coordinator.swift in Sources */,
 				C14171BF2A90E2CA00489382 /* GeckoCryptoCoin.swift in Sources */,
 				C14171AE2A8ED91700489382 /* CryptoWatchCoordinator.swift in Sources */,
