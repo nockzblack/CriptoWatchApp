@@ -51,11 +51,24 @@ class CryptoWatchCoordinator: Coordinator {
         // Initalizing Crypto Coins List View Model
         let coinsListViewModel = CryptoCoinsListVM()
         
+        // Installing closure handlers
+        coinsListViewModel.didSelectCryptoCoin = { [weak self] (cryptoCoinData) in
+            self?.cryptoDetail(cryptoCoinData)
+        }
+        
         // Initializing Cripto Coins List View Controller
         let coinsListVC = CryptoCoinsListVC()
         coinsListVC.viewModel = coinsListViewModel
         
         // Push Coins List View Controller Onto Navigation Stack
         navigationController.pushViewController(coinsListVC, animated: true)
+    }
+    
+    private func cryptoDetail(_ crypto: GeckoCryptoCoin) {
+        // Initialize Crytp Detail View Controller
+        let cryptoCoinDetail = CryptoDetailVC()
+        
+        // Push Crypto Detail View Controller onto navigations tack
+        navigationController.pushViewController(cryptoCoinDetail, animated: true)
     }
 }

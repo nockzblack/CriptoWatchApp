@@ -37,6 +37,8 @@ final class CryptoCoinsListVM {
     
     var didFetchCryptoCoinData: DidFetchCryptoCoinsDataCompletion?
     
+    var didSelectCryptoCoin: ((GeckoCryptoCoin) -> Void)?
+    
     var cryptoCoinsData: [GeckoCryptoCoin]
     
     var currency: Currency
@@ -78,6 +80,10 @@ extension CryptoCoinsListVM {
             case .price:
                 cryptoCoinsData.sort { $0.currentPrice > $1.currentPrice }
         }
+    }
+    
+    func selectCryptoCoin(at index: Int) {
+        didSelectCryptoCoin?(cryptoCoinsData[index])
     }
 
 }

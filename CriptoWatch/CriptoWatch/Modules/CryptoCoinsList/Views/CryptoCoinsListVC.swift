@@ -17,7 +17,7 @@ final class CryptoCoinsListVC: UIViewController {
     }
     
     
-    // MARK: - Properties
+    // MARK: - UI Properties
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -46,6 +46,8 @@ final class CryptoCoinsListVC: UIViewController {
         refreshControl.attributedTitle = NSAttributedString(string: "Fetching Crypto Data ...", attributes: attributes)
         return refreshControl
     }()
+    
+    // MARK: - Object Properties
     
     var viewModel: CryptoCoinsListVM? {
         didSet {
