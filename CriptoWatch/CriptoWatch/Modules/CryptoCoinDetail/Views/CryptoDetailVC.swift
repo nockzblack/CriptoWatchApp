@@ -10,10 +10,8 @@ import UIKit
 final class CryptoDetailVC: UIViewController {
     
     // MARK: - UI Properties
-    private let image: UIImageView = {
+    private let cryptoCoinImage: UIImageView = {
         let imageView = UIImageView()
-        // TODO: Remove Image
-        imageView.image = UIImage(systemName: "bitcoinsign.circle")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -75,6 +73,8 @@ final class CryptoDetailVC: UIViewController {
             updateData(with: viewModel)
         }
     }
+    private lazy var imageService = ImageService()
+    private var imageRequest: Cancellable?
     
     
     // MARK: - Overrides
@@ -84,6 +84,13 @@ final class CryptoDetailVC: UIViewController {
         self.view.backgroundColor = .white
         setupView()
         
+    }
+    
+    // MARK: - Deinitialization
+    
+    deinit {
+        // Cancel Data Task
+        imageRequest?.cancel()
     }
     
 }
@@ -96,10 +103,21 @@ private extension CryptoDetailVC {
         self.currentPriceLabel.text = data.currentPrice
         self.totalVolume.text = data.totalVolume
         
+        guard let validImageUrl = data.image else {
+            cryptoCoinImage.image = UIImage(systemName: "dollarsign.circle.fill")
+            return
+        }
+        
+        // Request image using image service
+        imageRequest = imageService.image(for: validImageUrl) { [weak self] image in
+            // Update image view
+            self?.cryptoCoinImage.image = image
+        }
+        
     }
     
     func setupView() {
-        self.view.addSubview(image)
+        self.view.addSubview(cryptoCoinImage)
         self.view.addSubview(symbolLabel)
         self.view.addSubview(currentPriceLabel)
         self.view.addSubview(totalVolume)
@@ -108,14 +126,14 @@ private extension CryptoDetailVC {
         // Layout
         NSLayoutConstraint.activate([
             // Image Layout
-            image.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            image.heightAnchor.constraint(equalToConstant: 200),
-            image.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            image.widthAnchor.constraint(equalTo: image.heightAnchor, multiplier: 1.0),
+            cryptoCoinImage.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            cryptoCoinImage.heightAnchor.constraint(equalToConstant: 150),
+            cryptoCoinImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            cryptoCoinImage.widthAnchor.constraint(equalTo: cryptoCoinImage.heightAnchor, multiplier: 1.0),
             
             // Symbol Label Layout
             symbolLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            symbolLabel.topAnchor.constraint(equalTo: self.image.bottomAnchor, constant: 2),
+            symbolLabel.topAnchor.constraint(equalTo: self.cryptoCoinImage.bottomAnchor, constant: 4),
             
             // Current Price Label Layout
             currentPriceLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),

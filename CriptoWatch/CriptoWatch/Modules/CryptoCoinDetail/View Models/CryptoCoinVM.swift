@@ -11,8 +11,8 @@ struct CryptoCoinVM {
     
     // MARK: - Properties
     
-    let cryptoCoinData: GeckoCryptoCoin
-    let currency: Currency
+    private let cryptoCoinData: GeckoCryptoCoin
+    private let currency: Currency
     
     private let dateFormatter: DateFormatter = {
         let formater = DateFormatter()
@@ -71,6 +71,5 @@ extension CryptoCoinVM: CryptoDetailRepresentable {
     var marketCap: String {
         currencyFormatter.string(from: NSNumber(value: cryptoCoinData.marketCap)) ?? "n/a"
     }
-    
     
 }
