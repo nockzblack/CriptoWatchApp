@@ -28,7 +28,6 @@ final class CryptoDetailVC: UIViewController {
     
     private let symbolLabel: UILabel = {
         let symbolLabel = UILabel()
-        symbolLabel.backgroundColor = .yellow
         symbolLabel.textAlignment = .center
         symbolLabel.translatesAutoresizingMaskIntoConstraints = false
         return symbolLabel
@@ -66,6 +65,17 @@ final class CryptoDetailVC: UIViewController {
         return totalVolume
     }()
     
+    // MARK: - Object Properties
+    
+    var viewModel: CryptoCoinVM? {
+        didSet {
+            guard let viewModel = viewModel else { return }
+            
+            // Setting up view model
+            updateData(with: viewModel)
+        }
+    }
+    
     
     // MARK: - Overrides
     
@@ -80,6 +90,14 @@ final class CryptoDetailVC: UIViewController {
 
 
 private extension CryptoDetailVC {
+    
+    func updateData(with data: CryptoDetailRepresentable) {
+        self.symbolLabel.text = data.symbol
+        self.currentPriceLabel.text = data.currentPrice
+        self.totalVolume.text = data.totalVolume
+        
+    }
+    
     func setupView() {
         self.view.addSubview(image)
         self.view.addSubview(symbolLabel)

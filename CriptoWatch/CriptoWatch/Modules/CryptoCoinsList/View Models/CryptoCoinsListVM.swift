@@ -37,7 +37,7 @@ final class CryptoCoinsListVM {
     
     var didFetchCryptoCoinData: DidFetchCryptoCoinsDataCompletion?
     
-    var didSelectCryptoCoin: ((GeckoCryptoCoin) -> Void)?
+    var didSelectCryptoCoin: ((GeckoCryptoCoin, Currency) -> Void)?
     
     var cryptoCoinsData: [GeckoCryptoCoin]
     
@@ -83,7 +83,7 @@ extension CryptoCoinsListVM {
     }
     
     func selectCryptoCoin(at index: Int) {
-        didSelectCryptoCoin?(cryptoCoinsData[index])
+        didSelectCryptoCoin?(cryptoCoinsData[index], currency)
     }
 
 }
