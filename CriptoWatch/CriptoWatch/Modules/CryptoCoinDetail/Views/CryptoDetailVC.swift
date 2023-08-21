@@ -12,24 +12,32 @@ final class CryptoDetailVC: UIViewController {
     // MARK: - UI Properties
     private let image: UIImageView = {
         let imageView = UIImageView()
+        // TODO: Remove Image
+        imageView.image = UIImage(systemName: "bitcoinsign.circle")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private let currentPriceLabel: UILabel = {
         let currentPriceLabel = UILabel()
+        currentPriceLabel.numberOfLines = 0
+        currentPriceLabel.font = UIFont.systemFont(ofSize: 34, weight: .bold)
         currentPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         return currentPriceLabel
     }()
     
     private let symbolLabel: UILabel = {
         let symbolLabel = UILabel()
+        symbolLabel.backgroundColor = .yellow
+        symbolLabel.textAlignment = .center
         symbolLabel.translatesAutoresizingMaskIntoConstraints = false
         return symbolLabel
     }()
     
     private let totalVolume: UILabel = {
         let totalVolume = UILabel()
+        totalVolume.numberOfLines = 0
+        totalVolume.font = UIFont.systemFont(ofSize: 18, weight: .thin)
         totalVolume.translatesAutoresizingMaskIntoConstraints = false
         return totalVolume
     }()
@@ -59,31 +67,44 @@ final class CryptoDetailVC: UIViewController {
     }()
     
     
+    // MARK: - Overrides
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .white
+        setupView()
+        
+    }
+    
 }
 
 
 private extension CryptoDetailVC {
     func setupView() {
         self.view.addSubview(image)
-        self.view.addSubview(currentPriceLabel)
         self.view.addSubview(symbolLabel)
+        self.view.addSubview(currentPriceLabel)
+        self.view.addSubview(totalVolume)
+        
         
         // Layout
         NSLayoutConstraint.activate([
-            // Vertical Layout
-            image.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20),
-            // Horizontal Layout
+            // Image Layout
+            image.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            image.heightAnchor.constraint(equalToConstant: 200),
             image.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            // Set Squar Aspect Ratio
             image.widthAnchor.constraint(equalTo: image.heightAnchor, multiplier: 1.0),
             
+            // Symbol Label Layout
             symbolLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            symbolLabel.topAnchor.constraint(equalTo: self.image.bottomAnchor, constant: 20),
-            symbolLabel.leadingAnchor.constraint(greaterThanOrEqualTo: self.view.leadingAnchor, constant: 20),
-            symbolLabel.trailingAnchor.constraint(greaterThanOrEqualTo: self.view.trailingAnchor, constant: 20),
+            symbolLabel.topAnchor.constraint(equalTo: self.image.bottomAnchor, constant: 2),
             
+            // Current Price Label Layout
             currentPriceLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            currentPriceLabel.topAnchor.constraint(equalTo: self.symbolLabel.bottomAnchor, constant: 20),
+            currentPriceLabel.topAnchor.constraint(equalTo: self.symbolLabel.bottomAnchor, constant: 10),
+            // Total Volume Label Layout
+            totalVolume.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            totalVolume.topAnchor.constraint(equalTo: self.currentPriceLabel.bottomAnchor, constant: 5),
         ])
     }
 }
