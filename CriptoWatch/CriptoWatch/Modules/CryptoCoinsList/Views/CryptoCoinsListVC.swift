@@ -17,7 +17,7 @@ final class CryptoCoinsListVC: UIViewController {
     }
     
     
-    // MARK: - Properties
+    // MARK: - UI Properties
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -47,6 +47,8 @@ final class CryptoCoinsListVC: UIViewController {
         return refreshControl
     }()
     
+    // MARK: - Object Properties
+    
     var viewModel: CryptoCoinsListVM? {
         didSet {
             guard let viewModel = viewModel else { return }
@@ -64,7 +66,7 @@ final class CryptoCoinsListVC: UIViewController {
         super.viewDidLoad()
         
         // Configuring View Controller
-        title = "Crypto Coins"
+        title = "Coins"
         view.backgroundColor = .white
         
         // Table View
@@ -160,6 +162,7 @@ private extension CryptoCoinsListVC {
         self.view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.rowHeight = 80
         tableView.refreshControl = refreshControl
         // Configure Refresh Control
         refreshControl.addTarget(self, action: #selector(fetchNewData(_:)), for: .valueChanged)

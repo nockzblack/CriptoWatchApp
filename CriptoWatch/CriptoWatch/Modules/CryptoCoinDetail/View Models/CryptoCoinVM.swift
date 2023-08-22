@@ -11,8 +11,8 @@ struct CryptoCoinVM {
     
     // MARK: - Properties
     
-    let cryptoCoinData: GeckoCryptoCoin
-    let currency: Currency
+    private let cryptoCoinData: GeckoCryptoCoin
+    private let currency: Currency
     
     private let dateFormatter: DateFormatter = {
         let formater = DateFormatter()
@@ -41,12 +41,40 @@ extension CryptoCoinVM: CryptoCoinRepresentable {
     
     var name: String { cryptoCoinData.name }
     
-    var symbol: String { cryptoCoinData.symbol }
+    var symbol: String { cryptoCoinData.symbol.uppercased() }
     
     var currentPrice: String { currencyFormatter.string(from: NSNumber(value: cryptoCoinData.currentPrice)) ?? "n/a" }
     
     var lastUpdated: String { dateFormatter.string(from: cryptoCoinData.lastUpdated) }
     
     var image: URL? { URL(string:  cryptoCoinData.image) }
+    
+}
+
+extension CryptoCoinVM: CryptoDetailRepresentable {
+    
+    var totalVolume: String {
+        currencyFormatter.string(from: NSNumber(value: cryptoCoinData.totalVolume)) ?? "n/a"
+    }
+    
+    var hightest24H: String {
+        currencyFormatter.string(from: NSNumber(value: cryptoCoinData.high24H)) ?? "n/a"
+    }
+    
+    var lowest24H: String {
+        currencyFormatter.string(from: NSNumber(value: cryptoCoinData.low24H)) ?? "n/a"
+    }
+    
+    var priceChange24H: String {
+        currencyFormatter.string(from: NSNumber(value: cryptoCoinData.priceChangePercentage24H)) ?? "n/a"
+    }
+    
+    var marketCap: String {
+        currencyFormatter.string(from: NSNumber(value: cryptoCoinData.marketCap)) ?? "n/a"
+    }
+    
+    var priceChange24HIsNegative: Bool {
+        return cryptoCoinData.priceChangePercentage24H.isLess(than: 0.0)
+    }
     
 }

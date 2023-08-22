@@ -30,4 +30,8 @@ extension CryptoCoinsListVC: UITableViewDataSource {
 // MARK: - Table View Delegate
 extension CryptoCoinsListVC: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Notifying view model
+        viewModel?.selectCryptoCoin(at: indexPath.row)
+    }
 }
