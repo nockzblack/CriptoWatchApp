@@ -162,6 +162,7 @@ private extension CryptoCoinsListVC {
         self.view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.rowHeight = 80
         tableView.refreshControl = refreshControl
         // Configure Refresh Control
         refreshControl.addTarget(self, action: #selector(fetchNewData(_:)), for: .valueChanged)
