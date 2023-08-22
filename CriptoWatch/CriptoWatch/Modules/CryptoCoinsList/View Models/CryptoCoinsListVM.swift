@@ -43,9 +43,24 @@ final class CryptoCoinsListVM {
     
     var currency: Currency
     
+    var filter: String?
+    
+    
     // MARK: - Computed Properties
     
-    var numberOfCryptoCoins: Int { cryptoCoinsData.count }
+    var cryptos: [GeckoCryptoCoin] {
+        if let filter = self.filter {
+            return cryptoCoinsData.filter { crypto in
+                return (crypto.name.lowercased().contains(filter)) || (crypto.symbol.lowercased().contains(filter))
+            }
+        }
+        return cryptoCoinsData
+    }
+    
+    var numberOfCryptos: Int {
+        cryptos.count
+    }
+        
     
     // MARK: - Initializers
     
@@ -68,7 +83,7 @@ extension CryptoCoinsListVM {
     
     func viewModel(for index: Int) -> CryptoCoinVM {
         // Making a Crypto Coin View Model
-        CryptoCoinVM(cryptoCoinData: cryptoCoinsData[index], currency: currency)
+        CryptoCoinVM(cryptoCoinData: cryptos[index], currency: currency)
     }
     
     func sortCryptoCoins(by sort: SortOptions) {
@@ -84,6 +99,16 @@ extension CryptoCoinsListVM {
     
     func selectCryptoCoin(at index: Int) {
         didSelectCryptoCoin?(cryptoCoinsData[index], currency)
+    }
+    
+    func filterCrypto(by title: String) {
+        filter = title.lowercased()
+        didFetchCryptoCoinData?([], nil)
+    }
+    
+    func removeFilter() {
+        filter = nil
+        didFetchCryptoCoinData?([], nil)
     }
 
 }

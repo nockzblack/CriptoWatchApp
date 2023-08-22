@@ -26,6 +26,7 @@
 		C14171D32A922C2200489382 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171D22A922C2200489382 /* Currency.swift */; };
 		C14171D82A94025500489382 /* CryptoDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171D72A94025500489382 /* CryptoDetailVC.swift */; };
 		C14171DB2A94117F00489382 /* CryptoDetailRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171DA2A94117F00489382 /* CryptoDetailRepresentable.swift */; };
+		C14171DF2A94E3FD00489382 /* CryptoCoinsListVC+SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171DE2A94E3FD00489382 /* CryptoCoinsListVC+SearchController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		C14171D22A922C2200489382 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		C14171D72A94025500489382 /* CryptoDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDetailVC.swift; sourceTree = "<group>"; };
 		C14171DA2A94117F00489382 /* CryptoDetailRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDetailRepresentable.swift; sourceTree = "<group>"; };
+		C14171DE2A94E3FD00489382 /* CryptoCoinsListVC+SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CryptoCoinsListVC+SearchController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 				C14171B62A90CE9700489382 /* Cells */,
 				C14171B12A8FB6AB00489382 /* CryptoCoinsListVC.swift */,
 				C14171BC2A90D3A600489382 /* CryptoCoinsListVC+TableView.swift */,
+				C14171DE2A94E3FD00489382 /* CryptoCoinsListVC+SearchController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C14171DF2A94E3FD00489382 /* CryptoCoinsListVC+SearchController.swift in Sources */,
 				C14171912A8ECE7A00489382 /* AppDelegate.swift in Sources */,
 				C14171C92A90F4D100489382 /* Cancellable.swift in Sources */,
 				C14171C42A90E40D00489382 /* GeckoAPI.swift in Sources */,
