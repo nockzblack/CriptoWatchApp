@@ -52,6 +52,7 @@ extension CryptoCoinVM: CryptoCoinRepresentable {
 }
 
 extension CryptoCoinVM: CryptoDetailRepresentable {
+    
     var totalVolume: String {
         currencyFormatter.string(from: NSNumber(value: cryptoCoinData.totalVolume)) ?? "n/a"
     }
@@ -70,6 +71,10 @@ extension CryptoCoinVM: CryptoDetailRepresentable {
     
     var marketCap: String {
         currencyFormatter.string(from: NSNumber(value: cryptoCoinData.marketCap)) ?? "n/a"
+    }
+    
+    var priceChange24HIsNegative: Bool {
+        return cryptoCoinData.priceChangePercentage24H.isLess(than: 0.0)
     }
     
 }

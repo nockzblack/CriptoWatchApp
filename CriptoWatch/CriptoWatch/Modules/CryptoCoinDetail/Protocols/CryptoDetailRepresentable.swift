@@ -18,4 +18,5 @@ protocol CryptoDetailRepresentable {
     var lowest24H: String { get }
     var priceChange24H: String { get }
     var marketCap: String { get }
+    var priceChange24HIsNegative: Bool { get }
 }

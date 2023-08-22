@@ -12,6 +12,7 @@ final class CryptoDetailVC: UIViewController {
     // MARK: - UI Properties
     private let cryptoCoinImage: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -19,7 +20,7 @@ final class CryptoDetailVC: UIViewController {
     private let currentPriceLabel: UILabel = {
         let currentPriceLabel = UILabel()
         currentPriceLabel.numberOfLines = 0
-        currentPriceLabel.font = UIFont.systemFont(ofSize: 34, weight: .bold)
+        currentPriceLabel.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
         currentPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         return currentPriceLabel
     }()
@@ -27,41 +28,91 @@ final class CryptoDetailVC: UIViewController {
     private let symbolLabel: UILabel = {
         let symbolLabel = UILabel()
         symbolLabel.textAlignment = .center
+        symbolLabel.font = UIFont.systemFont(ofSize: 22, weight: .ultraLight)
         symbolLabel.translatesAutoresizingMaskIntoConstraints = false
         return symbolLabel
     }()
     
+    
     private let totalVolume: UILabel = {
-        let totalVolume = UILabel()
-        totalVolume.numberOfLines = 0
-        totalVolume.font = UIFont.systemFont(ofSize: 18, weight: .thin)
-        totalVolume.translatesAutoresizingMaskIntoConstraints = false
-        return totalVolume
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let volumeLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = "Volume"
+        label.font = UIFont.systemFont(ofSize: 12, weight: .thin)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
+    private let marketCap: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let marketCapLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Market Cap"
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 12, weight: .thin)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private let highestPrice24H: UILabel = {
-        let totalVolume = UILabel()
-        totalVolume.translatesAutoresizingMaskIntoConstraints = false
-        return totalVolume
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.textColor = .systemTeal
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let highestPrice24HLabel: UILabel = {
+        let label = UILabel()
+        label.text = "24H Highest"
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 12, weight: .thin)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private let lowestPrice24H: UILabel = {
-        let totalVolume = UILabel()
-        totalVolume.translatesAutoresizingMaskIntoConstraints = false
-        return totalVolume
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.textColor = .systemIndigo
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let lowestPrice24HLabel: UILabel = {
+        let label = UILabel()
+        label.text = "24H Lowest"
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 12, weight: .thin)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private let priceChange24H: UILabel = {
-        let totalVolume = UILabel()
-        totalVolume.translatesAutoresizingMaskIntoConstraints = false
-        return totalVolume
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    private let priceChange24HLabel: UILabel = {
+        let label = UILabel()
+        label.text = "24H Change"
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 12, weight: .thin)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
-    private let marketCap: UILabel = {
-        let totalVolume = UILabel()
-        totalVolume.translatesAutoresizingMaskIntoConstraints = false
-        return totalVolume
-    }()
     
     // MARK: - Object Properties
     
@@ -102,6 +153,12 @@ private extension CryptoDetailVC {
         self.symbolLabel.text = data.symbol
         self.currentPriceLabel.text = data.currentPrice
         self.totalVolume.text = data.totalVolume
+        self.marketCap.text = data.marketCap
+        self.highestPrice24H.text = data.hightest24H
+        self.lowestPrice24H.text = data.lowest24H
+        self.priceChange24H.text = data.priceChange24H
+        self.priceChange24H.textColor = data.priceChange24HIsNegative ? .systemRed : .systemGreen
+        
         
         guard let validImageUrl = data.image else {
             cryptoCoinImage.image = UIImage(systemName: "dollarsign.circle.fill")
@@ -120,7 +177,15 @@ private extension CryptoDetailVC {
         self.view.addSubview(cryptoCoinImage)
         self.view.addSubview(symbolLabel)
         self.view.addSubview(currentPriceLabel)
-        self.view.addSubview(totalVolume)
+        
+        
+        // Defining Stack Views
+        let views: [UIView] = [totalVolume, volumeLabel, marketCap, marketCapLabel, highestPrice24H, highestPrice24HLabel, lowestPrice24H, lowestPrice24HLabel, priceChange24H, priceChange24HLabel]
+        let criptoDetailsSV: UIStackView = UIStackView(arrangedSubviews: views)
+        criptoDetailsSV.spacing = 6
+        criptoDetailsSV.axis = .vertical
+        criptoDetailsSV.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(criptoDetailsSV)
         
         
         // Layout
@@ -138,9 +203,12 @@ private extension CryptoDetailVC {
             // Current Price Label Layout
             currentPriceLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             currentPriceLabel.topAnchor.constraint(equalTo: self.symbolLabel.bottomAnchor, constant: 10),
+            
             // Total Volume Label Layout
-            totalVolume.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            totalVolume.topAnchor.constraint(equalTo: self.currentPriceLabel.bottomAnchor, constant: 5),
+            criptoDetailsSV.topAnchor.constraint(equalTo: self.currentPriceLabel.bottomAnchor, constant: 40),
+            criptoDetailsSV.bottomAnchor.constraint(lessThanOrEqualTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            criptoDetailsSV.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            criptoDetailsSV.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
         ])
     }
 }
