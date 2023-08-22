@@ -150,6 +150,7 @@ final class CryptoDetailVC: UIViewController {
 private extension CryptoDetailVC {
     
     func updateData(with data: CryptoDetailRepresentable) {
+        self.title = data.name
         self.symbolLabel.text = data.symbol
         self.currentPriceLabel.text = data.currentPrice
         self.totalVolume.text = data.totalVolume

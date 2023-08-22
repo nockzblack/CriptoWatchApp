@@ -66,7 +66,7 @@ final class CryptoCoinsListVC: UIViewController {
         super.viewDidLoad()
         
         // Configuring View Controller
-        title = "Crypto Coins"
+        title = "Coins"
         view.backgroundColor = .white
         
         // Table View
