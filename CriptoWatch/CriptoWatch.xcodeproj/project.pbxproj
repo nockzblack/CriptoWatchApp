@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		C14171912A8ECE7A00489382 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171902A8ECE7A00489382 /* AppDelegate.swift */; };
 		C14171932A8ECE7A00489382 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171922A8ECE7A00489382 /* SceneDelegate.swift */; };
-		C14171982A8ECE7A00489382 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C14171962A8ECE7A00489382 /* Main.storyboard */; };
 		C141719A2A8ECE7B00489382 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C14171992A8ECE7B00489382 /* Assets.xcassets */; };
 		C141719D2A8ECE7B00489382 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C141719B2A8ECE7B00489382 /* LaunchScreen.storyboard */; };
 		C14171AC2A8ED79400489382 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171AB2A8ED79400489382 /* Coordinator.swift */; };
@@ -33,7 +32,6 @@
 		C141718D2A8ECE7A00489382 /* CriptoWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CriptoWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C14171902A8ECE7A00489382 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C14171922A8ECE7A00489382 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C14171972A8ECE7A00489382 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C14171992A8ECE7B00489382 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C141719C2A8ECE7B00489382 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C141719E2A8ECE7B00489382 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 		C14171A72A8ED4A300489382 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				C14171962A8ECE7A00489382 /* Main.storyboard */,
 				C141719B2A8ECE7B00489382 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
@@ -331,7 +328,6 @@
 			files = (
 				C141719D2A8ECE7B00489382 /* LaunchScreen.storyboard in Resources */,
 				C141719A2A8ECE7B00489382 /* Assets.xcassets in Resources */,
-				C14171982A8ECE7A00489382 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,14 +361,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C14171962A8ECE7A00489382 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C14171972A8ECE7A00489382 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C141719B2A8ECE7B00489382 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -512,7 +500,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -545,7 +532,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
