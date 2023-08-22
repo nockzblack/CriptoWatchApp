@@ -19,7 +19,7 @@ final class CryptoCoinsListVC: UIViewController {
     
     // MARK: - UI Properties
     
-    private let tableView: UITableView = {
+    let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(CryptoCoinTableViewCell.self, forCellReuseIdentifier: CryptoCoinTableViewCell.reuseIdentifier)
@@ -27,7 +27,7 @@ final class CryptoCoinsListVC: UIViewController {
         return tableView
     }()
     
-    private let activityIndicatorView: UIActivityIndicatorView = {
+    let activityIndicatorView: UIActivityIndicatorView = {
         let activityIndecator = UIActivityIndicatorView()
         activityIndecator.translatesAutoresizingMaskIntoConstraints = false
         activityIndecator.hidesWhenStopped = true
@@ -65,18 +65,14 @@ final class CryptoCoinsListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Configuring View Controller
-        title = "Coins"
-        view.backgroundColor = .white
-        
+        // Setup Additional Views
+        setupViewController()
+    
         // Table View
         setupTableView()
+        
         // Activity Indicator
         setupActivityIndicator()
-        // Currency Bar Item
-        let currencyItem = configCurrencyItem()
-        let sortItem = configSortItem()
-        navigationItem.rightBarButtonItems = [currencyItem, sortItem]
     }
     
 }
@@ -156,6 +152,35 @@ private extension CryptoCoinsListVC {
             activityIndicatorView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             activityIndicatorView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
         ])
+    }
+    
+    func setupViewController() {
+        // Configuring View Controller
+        title = "Coins"
+        view.backgroundColor = .white
+        
+        // Creating Search Bar
+        let searchController = UISearchController()
+        
+        // Setting View Controller as dalegate
+        searchController.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+        
+        // Styling Search Controller
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Cryptos by name"
+        
+        // Adding the search bar in the navigation bar.
+        navigationItem.searchController = searchController
+        
+        // Sticking search bar to View Controller context
+        definesPresentationContext = true
+        
+        // Bar Items
+        let currencyItem = configCurrencyItem()
+        let sortItem = configSortItem()
+        navigationItem.rightBarButtonItems = [currencyItem, sortItem]
     }
     
     func setupTableView() {
