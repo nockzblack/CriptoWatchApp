@@ -63,7 +63,7 @@
 <br>
 <div align="center">
   <img src="images/home_ss.png" alt="Logo" width="200">
-  <img src="images/details_ss.png" alt="Logo" width="200">
+  <img src="images/detail_ss.png" alt="Logo" width="200">
 </div>
 
 
