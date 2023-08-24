@@ -39,11 +39,13 @@ final class CryptoCoinsListVM {
     
     var didSelectCryptoCoin: ((GeckoCryptoCoin, Currency) -> Void)?
     
-    var cryptoCoinsData: [GeckoCryptoCoin]
-    
     var currency: Currency
     
-    var filter: String?
+    private let networkService: NetworkService
+    
+    private var cryptoCoinsData: [GeckoCryptoCoin]
+    
+    private var filter: String?
     
     
     // MARK: - Computed Properties
@@ -64,7 +66,8 @@ final class CryptoCoinsListVM {
     
     // MARK: - Initializers
     
-    init() {
+    init(networkService: NetworkService) {
+        self.networkService = networkService
         cryptoCoinsData = []
         currency = .usd
     }
@@ -81,9 +84,14 @@ extension CryptoCoinsListVM {
         fetchCryptoCoinData(with: GeckoAPI.getURL(for: currency))
     }
     
-    func viewModel(for index: Int) -> CryptoCoinVM {
+    func viewModel(for index: Int) -> CryptoCoinVM? {
+        
+        guard let crypto = cryptos[safe: index] else {
+            return nil
+        }
+        
         // Making a Crypto Coin View Model
-        CryptoCoinVM(cryptoCoinData: cryptos[index], currency: currency)
+        return CryptoCoinVM(cryptoCoinData: crypto, currency: currency)
     }
     
     func sortCryptoCoins(by sort: SortOptions) {
@@ -119,7 +127,7 @@ extension CryptoCoinsListVM {
 private extension CryptoCoinsListVM {
     func fetchCryptoCoinData(with url: URL) {
         // Creating data taks
-        URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+        self.networkService.fetchData(with: url) { [weak self] (data, response, error) in
             // Informing Http response code
             if let response = response as? HTTPURLResponse {
                 print("Status Code: \(response.statusCode)")
@@ -169,6 +177,6 @@ private extension CryptoCoinsListVM {
                 self?.didFetchCryptoCoinData?(nil, .noCryptoDataAvailable)
                 
             }
-        }.resume()
+        }
     }
 }

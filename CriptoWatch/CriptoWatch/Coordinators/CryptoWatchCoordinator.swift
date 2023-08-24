@@ -49,7 +49,7 @@ class CryptoWatchCoordinator: Coordinator {
     
     private func showCryptoCoinsList() {
         // Initalizing Crypto Coins List View Model
-        let coinsListViewModel = CryptoCoinsListVM()
+        let coinsListViewModel = CryptoCoinsListVM(networkService: NetworkManager())
         
         // Installing closure handlers
         coinsListViewModel.didSelectCryptoCoin = { [weak self] (cryptoCoinData, currency) in
