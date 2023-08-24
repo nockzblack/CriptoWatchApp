@@ -30,6 +30,9 @@
 		C14171FF2A96A4E000489382 /* CryptoCoinVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14171FE2A96A4E000489382 /* CryptoCoinVMTests.swift */; };
 		C14172032A97395700489382 /* XCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14172022A97395700489382 /* XCTestCase.swift */; };
 		C14172052A973A0900489382 /* coinGecko.json in Resources */ = {isa = PBXBuildFile; fileRef = C14172042A973A0900489382 /* coinGecko.json */; };
+		C14172092A975CB600489382 /* CryptoCoinsListVMTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14172082A975CB600489382 /* CryptoCoinsListVMTest.swift */; };
+		C141720B2A97624500489382 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C141720A2A97624500489382 /* NetworkManager.swift */; };
+		C141720D2A97627000489382 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C141720C2A97627000489382 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,9 @@
 		C14171FE2A96A4E000489382 /* CryptoCoinVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCoinVMTests.swift; sourceTree = "<group>"; };
 		C14172022A97395700489382 /* XCTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCase.swift; sourceTree = "<group>"; };
 		C14172042A973A0900489382 /* coinGecko.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = coinGecko.json; sourceTree = "<group>"; };
+		C14172082A975CB600489382 /* CryptoCoinsListVMTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CryptoCoinsListVMTest.swift; path = "CriptoWatch/Modules/CryptoCoinsList/View Models/CryptoCoinsListVMTest.swift"; sourceTree = SOURCE_ROOT; };
+		C141720A2A97624500489382 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		C141720C2A97627000489382 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +118,7 @@
 		C141718F2A8ECE7A00489382 /* CriptoWatch */ = {
 			isa = PBXGroup;
 			children = (
+				C141720E2A97640500489382 /* Managers */,
 				C14171A42A8ED43700489382 /* Delegates */,
 				C14171D12A922C1700489382 /* Types */,
 				C14171C22A90E3EE00489382 /* Configuration */,
@@ -227,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				C14171C82A90F4D100489382 /* Cancellable.swift */,
+				C141720C2A97627000489382 /* NetworkService.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -311,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				C14171FE2A96A4E000489382 /* CryptoCoinVMTests.swift */,
+				C14172082A975CB600489382 /* CryptoCoinsListVMTest.swift */,
 			);
 			path = "Test Cases";
 			sourceTree = "<group>";
@@ -329,6 +338,14 @@
 				C14172022A97395700489382 /* XCTestCase.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C141720E2A97640500489382 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				C141720A2A97624500489382 /* NetworkManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,6 +450,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C141720B2A97624500489382 /* NetworkManager.swift in Sources */,
 				C14171DF2A94E3FD00489382 /* CryptoCoinsListVC+SearchController.swift in Sources */,
 				C14171912A8ECE7A00489382 /* AppDelegate.swift in Sources */,
 				C14171C92A90F4D100489382 /* Cancellable.swift in Sources */,
@@ -442,6 +460,7 @@
 				C14171CD2A915BC400489382 /* CryptoCoinVM.swift in Sources */,
 				C14171BB2A90D0F800489382 /* CryptoCoinRepresentable.swift in Sources */,
 				C14171DB2A94117F00489382 /* CryptoDetailRepresentable.swift in Sources */,
+				C141720D2A97627000489382 /* NetworkService.swift in Sources */,
 				C14171B22A8FB6AB00489382 /* CryptoCoinsListVC.swift in Sources */,
 				C14171C72A90F4A100489382 /* ImageService.swift in Sources */,
 				C14171C12A90E34C00489382 /* CryptoCoinsListVM.swift in Sources */,
@@ -460,6 +479,7 @@
 			files = (
 				C14172032A97395700489382 /* XCTestCase.swift in Sources */,
 				C14171FF2A96A4E000489382 /* CryptoCoinVMTests.swift in Sources */,
+				C14172092A975CB600489382 /* CryptoCoinsListVMTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
