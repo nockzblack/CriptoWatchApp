@@ -1,5 +1,5 @@
 //
-//  CriptoWatchCoordinator.swift
+//  CryptoWatchCoordinator.swift
 //  CriptoWatch
 //
 //  Created by Fernando Benavides on 18/08/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CriptoWatchCoordinator: Coordinator {
+class CryptoWatchCoordinator: Coordinator {
     
     // MARK: - Properties
     
@@ -26,7 +26,7 @@ class CriptoWatchCoordinator: Coordinator {
         
         // Applying style to navigation bar
         navigationController.navigationBar.tintColor = .systemBlue
-        navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemTeal]
+        navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         
         // Show Cripto List
         showCryptoCoinsList()
@@ -49,13 +49,32 @@ class CriptoWatchCoordinator: Coordinator {
     
     private func showCryptoCoinsList() {
         // Initalizing Crypto Coins List View Model
-        let coinsListViewModel = CryptoCoinsListVM()
+        let coinsListViewModel = CryptoCoinsListVM(networkService: NetworkManager())
+        
+        // Installing closure handlers
+        coinsListViewModel.didSelectCryptoCoin = { [weak self] (cryptoCoinData, currency) in
+            self?.cryptoDetail(cryptoCoinData, currency)
+        }
         
         // Initializing Cripto Coins List View Controller
         let coinsListVC = CryptoCoinsListVC()
+        // Injecting View Model
         coinsListVC.viewModel = coinsListViewModel
         
         // Push Coins List View Controller Onto Navigation Stack
         navigationController.pushViewController(coinsListVC, animated: true)
+    }
+    
+    private func cryptoDetail(_ crypto: GeckoCryptoCoin, _ currency: Currency) {
+        // Initalizing Crypto Coin List View Model
+        let coinsListViewModel = CryptoCoinVM(cryptoCoinData: crypto, currency: currency)
+        
+        // Initialize Crytp Detail View Controller
+        let cryptoCoinDetail = CryptoDetailVC()
+        // Injecting View Model
+        cryptoCoinDetail.viewModel = coinsListViewModel
+        
+        // Push Crypto Detail View Controller onto navigations tack
+        navigationController.pushViewController(cryptoCoinDetail, animated: true)
     }
 }

@@ -103,13 +103,6 @@ extension CryptoCoinTableViewCell {
 private extension CryptoCoinTableViewCell {
     
     func setupViews() {
-        contentView.addSubview(coinImageView)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(currentPriceLabel)
-        contentView.addSubview(lastUpdatedLabel)
-        contentView.addSubview(symbolLabel)
-        
-        
         // Defining Stack Views
         let nameAndPriceSV: UIStackView = UIStackView(arrangedSubviews: [nameLabel, currentPriceLabel])
         nameAndPriceSV.spacing = 4
@@ -127,17 +120,15 @@ private extension CryptoCoinTableViewCell {
         rootSV.axis = .horizontal
         rootSV.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(rootSV)
-        
+        let marginGuide = self.contentView.layoutMarginsGuide
         NSLayoutConstraint.activate([
             // Image
-            coinImageView.widthAnchor.constraint(equalToConstant: 50),
-            coinImageView.heightAnchor.constraint(equalToConstant: 50),
+            coinImageView.heightAnchor.constraint(equalTo: coinImageView.widthAnchor, multiplier: 1.0),
             // Root Stack View
-            rootSV.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            rootSV.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-            rootSV.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-            rootSV.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
-            
+            rootSV.topAnchor.constraint(equalTo: marginGuide.topAnchor, constant: 0),
+            rootSV.bottomAnchor.constraint(equalTo: marginGuide.bottomAnchor, constant: 0),
+            rootSV.leadingAnchor.constraint(equalTo: marginGuide.leadingAnchor, constant: 0),
+            rootSV.trailingAnchor.constraint(equalTo: marginGuide.trailingAnchor, constant: 0),
         ])
     }
 }

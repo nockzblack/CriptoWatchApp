@@ -13,11 +13,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    private let appCoordiantor = CriptoWatchCoordinator()
+    private let appCoordiantor = CryptoWatchCoordinator()
     
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow( frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
         
         // Configuring window
         window?.rootViewController = appCoordiantor.rootViewController

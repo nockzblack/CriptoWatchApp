@@ -17,9 +17,9 @@ final class CryptoCoinsListVC: UIViewController {
     }
     
     
-    // MARK: - Properties
+    // MARK: - UI Properties
     
-    private let tableView: UITableView = {
+    let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(CryptoCoinTableViewCell.self, forCellReuseIdentifier: CryptoCoinTableViewCell.reuseIdentifier)
@@ -27,7 +27,7 @@ final class CryptoCoinsListVC: UIViewController {
         return tableView
     }()
     
-    private let activityIndicatorView: UIActivityIndicatorView = {
+    let activityIndicatorView: UIActivityIndicatorView = {
         let activityIndecator = UIActivityIndicatorView()
         activityIndecator.translatesAutoresizingMaskIntoConstraints = false
         activityIndecator.hidesWhenStopped = true
@@ -36,6 +36,18 @@ final class CryptoCoinsListVC: UIViewController {
         activityIndecator.startAnimating()
         return activityIndecator
     }()
+    
+    private let refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 14, weight: .thin)
+        ]
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching Crypto Data ...", attributes: attributes)
+        return refreshControl
+    }()
+    
+    // MARK: - Object Properties
     
     var viewModel: CryptoCoinsListVM? {
         didSet {
@@ -53,13 +65,12 @@ final class CryptoCoinsListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Configuring View Controller
-        title = "Crypto Coins"
-        view.backgroundColor = .white
-        
-        
+        // Setup Additional Views
+        setupViewController()
+    
         // Table View
         setupTableView()
+        
         // Activity Indicator
         setupActivityIndicator()
     }
@@ -69,6 +80,69 @@ final class CryptoCoinsListVC: UIViewController {
 
 // MARK: Private API
 private extension CryptoCoinsListVC {
+    
+    @objc private func fetchNewData(_ sender: Any) {
+        viewModel?.startFetchingData()
+    }
+    
+    func configCurrencyItem() -> UIBarButtonItem {
+        let dollarImages = UIImage(systemName: "dollarsign.arrow.circlepath")
+        let barItem = UIBarButtonItem(image: dollarImages, style: .plain, target: self, action: nil)
+        barItem.primaryAction = nil
+        
+        // Create Three Action Items
+        let USDOption = UIAction(title: "USD") { _ in
+            self.viewModel?.currency = .usd
+            self.viewModel?.startFetchingData()
+        }
+        
+        let EUROption = UIAction(title: "EUR") { _ in
+            self.viewModel?.currency = .eur
+            self.viewModel?.startFetchingData()
+        }
+        
+        let MXNOption = UIAction(title: "MXN") { _ in
+            self.viewModel?.currency = .mxn
+            self.viewModel?.startFetchingData()
+        }
+        
+        // Create Menu with Action Items
+        let menu = UIMenu(title: "Currency", children: [USDOption, EUROption, MXNOption])
+        
+        // Set Menu to Bar Items
+        barItem.menu = menu
+        
+        return barItem
+    }
+    
+    func configSortItem() -> UIBarButtonItem  {
+        let arrowosImages = UIImage(systemName: "arrow.up.arrow.down")
+        let barItem = UIBarButtonItem(image: arrowosImages, style: .plain, target: self, action:nil)
+        barItem.primaryAction = nil
+        
+        // Create Sort mdoes Action
+        let nameOption = UIAction(title: "Name", image: UIImage(systemName: "character.book.closed.fill")) { _ in
+            self.viewModel?.sortCryptoCoins(by: .name)
+            self.tableView.reloadData()
+        }
+        
+        let priceOption = UIAction(title: "Price", image: UIImage(systemName: "dollarsign")) { _ in
+            self.viewModel?.sortCryptoCoins(by: .price)
+            self.tableView.reloadData()
+        }
+        
+        let marketCapOption = UIAction(title: "Market Cap", image: UIImage(systemName: "chart.pie.fill")) { _ in
+            self.viewModel?.sortCryptoCoins(by: .marketCap)
+            self.tableView.reloadData()
+        }
+        
+        // Return a UIMenu with the action items
+        let menu = UIMenu(title: "Sort by", children: [nameOption, priceOption, marketCapOption])
+        // Set Menu to Bar Items
+        barItem.menu = menu
+        
+        return barItem
+    }
     
     func setupActivityIndicator() {
         self.view.addSubview(activityIndicatorView)
@@ -80,11 +154,43 @@ private extension CryptoCoinsListVC {
         ])
     }
     
+    func setupViewController() {
+        // Configuring View Controller
+        title = "Coins"
+        view.backgroundColor = .white
+        
+        // Creating Search Bar
+        let searchController = UISearchController()
+        
+        // Setting View Controller as dalegate
+        searchController.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+        
+        // Styling Search Controller
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Cryptos by name"
+        
+        // Adding the search bar in the navigation bar.
+        navigationItem.searchController = searchController
+        
+        // Sticking search bar to View Controller context
+        definesPresentationContext = true
+        
+        // Bar Items
+        let currencyItem = configCurrencyItem()
+        let sortItem = configSortItem()
+        navigationItem.rightBarButtonItems = [currencyItem, sortItem]
+    }
+    
     func setupTableView() {
         self.view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
-        
+        tableView.rowHeight = 80
+        tableView.refreshControl = refreshControl
+        // Configure Refresh Control
+        refreshControl.addTarget(self, action: #selector(fetchNewData(_:)), for: .valueChanged)
         // Layout
         NSLayoutConstraint.activate([
             // Vertical Layout
@@ -113,9 +219,9 @@ private extension CryptoCoinsListVC {
                 DispatchQueue.main.async {
                     // Stop animation
                     self?.activityIndicatorView.stopAnimating()
-                    
                     // Update collection view
                     self?.tableView.reloadData()
+                    self?.refreshControl.endRefreshing()
                     self?.tableView.isHidden = false
                 }
             } else {
@@ -125,7 +231,7 @@ private extension CryptoCoinsListVC {
         }
     }
     
-    func presentAlert(of alertType: AlertType) {
+    private func presentAlert(of alertType: AlertType) {
         // Helpers
         let title: String
         let message: String
