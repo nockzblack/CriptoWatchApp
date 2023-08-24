@@ -84,9 +84,14 @@ extension CryptoCoinsListVM {
         fetchCryptoCoinData(with: GeckoAPI.getURL(for: currency))
     }
     
-    func viewModel(for index: Int) -> CryptoCoinVM {
+    func viewModel(for index: Int) -> CryptoCoinVM? {
+        
+        guard let crypto = cryptos[safe: index] else {
+            return nil
+        }
+        
         // Making a Crypto Coin View Model
-        CryptoCoinVM(cryptoCoinData: cryptos[index], currency: currency)
+        return CryptoCoinVM(cryptoCoinData: crypto, currency: currency)
     }
     
     func sortCryptoCoins(by sort: SortOptions) {
